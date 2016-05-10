@@ -1,0 +1,55 @@
+* {
+  margin: 10px auto;
+  padding: 10px 10px;
+  background-color: #dd9144;
+}
+.wrapper {
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: #fff;
+  text-align: center;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #fff;
+}
+
+
+video {
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 90%;
+  background-color: inherit;
+}
+
+#media-controls {
+
+}
+
+#play-pause-button {
+  float: left;
+}
+
+#stop-button {
+  float: left; 
+}
+
+#progress-bar {
+	color:#fff;
+	font-size:12px;
+	width:172px;
+	height:16px;
+	border:none;
+	margin-right:5px;
+	background:#434343;
+}
+
+p {
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 90%;
+}
