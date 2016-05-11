@@ -25,12 +25,10 @@ video {
   background-color: inherit;
 }
 
-#media-controls {
-  display: inline-block; 
-}
-
-#play-pause-button {
-  float: left;
+#video-controls {
+  background: #fff;
+  list-style: none;
+  display: inline; 
 }
 
 .play {
@@ -41,11 +39,9 @@ video {
   background: transparent url('../icons/pause-icon.png') no-repeat 0 0;
 }
 
-#stop-button {
-  float: left;
-}
 
-#progress-bar, value {
+
+#progress {
 	color:#fff;
 	font-size:12px;
 	width:172px;

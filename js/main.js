@@ -1,116 +1,127 @@
-// Variables
-var mediaPlayer;
-var playPauseBtn;
-var progressBar;
-var muteBtn;
+// Variables. Mostly buttons s
+var playpause = document.getElementById('playpause');
+var stop = document.getElementById('stop');
+var mute = document.getElementById('mute');
+var volinc = document.getElementById('volinc');
+var voldec = document.getElementById('voldec');
+var progress = document.getElementById('progress');
+var progressBar = document.getElementById('progress-bar');
+var fullscreen = document.getElementById('fs');
+var videoContainer = document.getElementById('wrapper');
+var video = document.getElementById('media-video');
+var videoControls = document.getElementById('video-controls');
 
-//Wait for DOM to be loaded before initialising media player
-document.addEventListener("DOMContentLoaded", function() { initializeMediaPlayer(); }, false);
-
-//Function to initialize Media Player
-function initializeMediaPlayer(){
-  mediaPlayer = document.getElementById("media-video");
-  playPauseBtn = document.getElementById("play-pause-button");
-  progressBar = document.getElementById("progress-bar");
-  muteBtn = document.getElementById("mute-button");
-  mediaPlayer.controls = false;
-
-
-//Add listener for time update event so we can update the video progress bar
-mediaPlayer.addEventListener('timeupdate', updateProgressBar());
-
-//Add listener for play pause event so the button can be updated
-mediaPlayer.addEventListener('play', function() {
-  changeButtonType(playPauseBtn, 'pause')
-}, false);
-
-mediaPlayer.addEventListener('pause', function() {
-  changeButtonType(playPauseBtn, 'play')
-}, false);
-
-mediaPlayer.addEventListener('volumechange', function(i) {
-  if (mediaPlayer.muted) changeButtonType (muteBtn, 'unmute');
-  else changeButtonType (muteBtn, 'mute');
-}, false);
-
-mediaPlayer.addEventListener('ended', function() {this.pause(); }, false);
+//Function to alter the volume of the video
+var alterVolume = function(dir) {
+   var currentVolume = Math.floor(video.volume * 10) / 10;
+   if (dir === '+') {
+      if (currentVolume < 1) video.volume += 0.1;
+   }
+   else if (dir === '-') {
+      if (currentVolume > 0) video.volume -= 0.1;
+   }
 };
 
-//Changes the play button to pause when play, and to play when paused
-function togglePlayPause() {
-  if (mediaPlayer.pause || mediaPlayer.ended) {
-  changeButtonType(playPauseBtn, 'pause')
-  mediaPlayer.play();
-  } else {
-    changeButtonType(playPauseBtn, 'play')
-    mediaPlayer.pause();
-  }
+//Full Screen section
+//Tests to see if the browser can handle full screen
+var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen);
+
+//Handles the visibility of fullscreen
+if (!fullScreenEnabled) {
+   fullscreen.style.display = 'none';
+};
+//this is what makes full screen work. If the browser is capable of handling full screen, the function runs tests to see if it can run it
+
+
+//Goes through the full screen browser functions to match it with the right one
+var isFullScreen = function() {
+   return !!(document.fullScreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
 };
 
-function pausePlayer() {
-  mediaPlayer.pause();
+var handleFullscreen = function() {
+   if (isFullScreen()) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+      else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+      setFullscreenData(false);
+   }
+   else {
+      if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
+      else if (videoContainer.mozRequestFullScreen) videoContainer.mozRequestFullScreen();
+      else if (videoContainer.webkitRequestFullScreen) videoContainer.webkitRequestFullScreen();
+      else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
+      setFullscreenData(true);
+   }
+};
+
+var setFullscreenData = function(state) {
+   videoContainer.setAttribute('data-fullscreen', !!state);
 }
+document.addEventListener('fullscreenchange', function(e) {
+   setFullscreenData(!!(document.fullScreen || document.fullscreenElement));
+});
+document.addEventListener('webkitfullscreenchange', function() {
+   setFullscreenData(!!document.webkitIsFullScreen);
+});
+document.addEventListener('mozfullscreenchange', function() {
+   setFullscreenData(!!document.mozFullScreen);
+});
+document.addEventListener('msfullscreenchange', function() {
+   setFullscreenData(!!document.msFullscreenElement);
+});
+// Hide the default controls
+video.controls = false;
 
-//Stops player from playing and returns it to the start
-function stopPlayer() {
-  mediaPlayer.pause();
-  mediaPlayer.currentTime = 0;
+// Display the user defined video controls
+videoControls.style.display = 'block';
+
+//Sets up the player if the browser supports the video
+var supportsVideo = !!document.createElement('video').canPlayType;
+if (supportsVideo) {
+
+//The play pause controls for the video
+  playpause.addEventListener('click', function(e) {
+     if (video.paused || video.ended) video.play();
+     else video.pause();
+  });
+
+//Increase and Decrease in volume by .1 increments. Largest is 1
+  volinc.addEventListener('click', function(e) {
+     alterVolume('+');
+  });
+  voldec.addEventListener('click', function(e) {
+     alterVolume('-');
+  });
+
+//Mutes video
+  mute.addEventListener('click', function(e) {
+     video.muted = !video.muted;
+  });
+
+//Pauses video and resets to start
+  stop.addEventListener('click', function(e) {
+     video.pause();
+     video.currentTime = 0;
+     progress.value = 0;
+  });
+
+  fs.addEventListener('click', function(e) {
+       handleFullscreen();
+  });
 };
 
-//Volume change function. Goes from 0-1 and goes up by .1 increments
-function changeVolume(direction){
-  if(direction === '+') mediaPlayer.volume += mediaPlayer.volume == 1 ? 0 : 0.1;
-  else mediaPlayer.volume -= (mediaPlayer.volume == 0 ? 0 : 0.1);
-  mediaPlayer.volume = parseFloat(mediaPlayer.volume).toFixed(1);
-};
+video.addEventListener('loadedmetadata', function() {
+   progress.setAttribute('max', video.duration);
+});
 
-function toggleMute(){
-  if(mediaPlayer.muted) {
-    changeButtonType(muteBtn, 'mute')
-    mediaPlayer.muted = false;
-  }else {
-    changeButtonType(muteBtn, 'unmute')
-    mediaPlayer.muted = true;
-  }
-};
+video.addEventListener('timeupdate', function() {
+   progress.value = video.currentTime;
+   progressBar.style.width = Math.floor((video.currentTime / video.duration) * 100) + '%';
+});
 
-function replayMedia(){
-  resetPlayer();
-  mediaPlayer.play();
-};
-
-function updateProgressBar() {
-  var percentage = Math.floor((100 / mediaPlayer.duration) * mediaPlayer.currentTime);
-  progressBar.value = percentage;
-};
-
-function changeButtonType(btn, value) {
-  btn.title = value;
-  btn.innerHTML = value;
-  btn.className = value;
-};
-
-function loadVideo() {
-  for (var i = 0; i < arguments.length; i++) {
-    var file = arguments[i].split('.');
-    var ext = file[file.length - 1];
-    if (canPlayVideo(ext)) {
-      resetPlayer();
-      mediaPlayer.src = arguments[i];
-      mediaPlayer.load();
-      break;
-    }
-  }
-};
-
-function canPlayVideo(ext) {
-  var ableToPlay = mediaPlayer.canPlayType('video/' + ext);
-  if (ableToPlay == '') return false;
-  else return true;
-};
-
-function resetPlayer() {
-  progressBar.value = 0;
-  mediaPlayer.currentTime = 0;
-  changeButtonType(playPauseBtn, 'play');
-};
+video.addEventListener('timeupdate', function() {
+   if (!progress.getAttribute('max')) progress.setAttribute('max', video.duration);
+   progress.value = video.currentTime;
+   progressBar.style.width = Math.floor((video.currentTime / video.duration) * 100) + '%';
+});

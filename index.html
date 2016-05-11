@@ -19,15 +19,20 @@
         <source src="video/video.mp4" type="video/mp4">
         <source src="video/video.ogg" type="video/ogg">
       </video>
-      <div id="media-controls">
-      	<progress id='progress-bar' min='0' max='100' value='0'></progress>
-        <button id='play-pause-button' class='play' title='play' onclick='togglePlayPause();'></button>
-        <div id="time-current" title="Current time"><span class="time">0:00 /</span></div>
-        <div id="time-duration" title="Duration"><span class="time">0:00</span></div>
-        <button id='stop-button' class='stop' title='stop' onclick='stopPlayer();'>Stop</button>
-        <button id='mute-button' class='mute' title='mute' onclick='toggleMute("true");'>Mute</button>
-        <button id="button-fullscreen" type="button" title="Fullscreen" onclick='viewFullscreen();'></button>
-      </div>
+        <ul id="video-controls" class="controls">
+          <li><button id="playpause" type="button">Play/Pause</button></li>
+          <li><button id="stop" type="button">Stop</button></li>
+          <li class="progress">
+            <progress id="progress" value="0" min="0">
+            <span id="progress-bar"></span>
+            </progress>
+          </li>
+          <li><button id="mute" type="button">Mute/Unmute</button></li>
+          <li><button id="volinc" type="button">Vol+</button></li>
+          <li><button id="voldec" type="button">Vol-</button></li>
+          <li><button id="fs" type="button">Fullscreen</button></li>
+        </ul>
+  </div>
       <p>Now that we've looked at the architecture
       of the internet, let's see how you might connect your personal devices to
       the internet inside your house. Well there are many ways to
