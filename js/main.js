@@ -17,7 +17,7 @@ function initializeMediaPlayer(){
 
 
 //Add listener for time update event so we can update the video progress bar
-mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
+mediaPlayer.addEventListener('timeupdate', updateProgressBar());
 
 //Add listener for play pause event so the button can be updated
 mediaPlayer.addEventListener('play', function() {
@@ -35,17 +35,21 @@ mediaPlayer.addEventListener('volumechange', function(i) {
 
 mediaPlayer.addEventListener('ended', function() {this.pause(); }, false);
 };
+
 //Changes the play button to pause when play, and to play when paused
 function togglePlayPause() {
-  if(mediaPlayer.pause || mediaPlayer.ended) {
-  changeButtonType(playPauseBtn, 'pause');
+  if (mediaPlayer.pause || mediaPlayer.ended) {
+  changeButtonType(playPauseBtn, 'pause')
   mediaPlayer.play();
-}
-  else {
-    changeButtonType(playPauseBtn, 'play');
+  } else {
+    changeButtonType(playPauseBtn, 'play')
     mediaPlayer.pause();
   }
 };
+
+function pausePlayer() {
+  mediaPlayer.pause();
+}
 
 //Stops player from playing and returns it to the start
 function stopPlayer() {
@@ -76,7 +80,7 @@ function replayMedia(){
 };
 
 function updateProgressBar() {
-  var percentage = Math.floor((100 /mediaPlayer.duration) * mediaPlayer.currentTime)
+  var percentage = Math.floor((100 / mediaPlayer.duration) * mediaPlayer.currentTime);
   progressBar.value = percentage;
 };
 

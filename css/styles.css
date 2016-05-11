@@ -26,18 +26,26 @@ video {
 }
 
 #media-controls {
-
+  display: inline-block; 
 }
 
 #play-pause-button {
   float: left;
 }
 
-#stop-button {
-  float: left; 
+.play {
+  background: transparent url('../icons/play-icon.png') no-repeat 0 0;
 }
 
-#progress-bar {
+.pause {
+  background: transparent url('../icons/pause-icon.png') no-repeat 0 0;
+}
+
+#stop-button {
+  float: left;
+}
+
+#progress-bar, value {
 	color:#fff;
 	font-size:12px;
 	width:172px;
@@ -46,6 +54,7 @@ video {
 	margin-right:5px;
 	background:#434343;
 }
+
 
 p {
   background-color: #fff;
