@@ -25,10 +25,15 @@ video {
   background-color: inherit;
 }
 
+li {
+  width: 10%;
+  background: none;
+  display: inline; 
+}
 #video-controls {
   background: #fff;
   list-style: none;
-  display: inline; 
+  display: inline;
 }
 
 .play {
