@@ -56,7 +56,8 @@ video {
 
 .controls #progress {
    cursor:pointer;
-   width:75.390625%;
+   width:100%;
+   background: blue;
 }
 
 .controls button {
@@ -79,7 +80,7 @@ video {
    background-image: url('data:image/png;base64,iVBORw0KGgoAAA ... ');
 }
 
-.controls progress {
+.controls #progress {
    display:block;
    width:100%;
    height:81%;
@@ -91,15 +92,27 @@ video {
    border-radius:2px;
 }
 
-.controls progress[data-state="fake"] {
-   background:#e6e6e6;
+.controls #progress[data-state="fake"] {
+   background:#fff;
    height:65%;
 }
-.controls progress span {
+.controls #progress span {
    width:0%;
    height:100%;
    display:inline-block;
-   background-color:#2a84cd;
+   background-color: white;
+}
+
+.controls #progress::-moz-progress-bar {
+   background-color:#aaa;
+}
+
+.controls #progress::-webkit-progress-value {
+   background-color:#aaa;
+}
+
+#progress-bar {
+  background: #fff;
 }
 
 
