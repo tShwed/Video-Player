@@ -1,10 +1,8 @@
 * {
   margin: 10px auto;
   padding: 10px 10px;
-  background-color: #dd9144;
 }
 .wrapper {
-  max-width: 80%;
   margin: 0 auto;
   background-color: #fff;
   text-align: center;
@@ -44,7 +42,7 @@ video {
 
 .controls > * {
    float:left;
-   width:3.90625%;
+   width:10%;
    height:100%;
    margin-left:0.1953125%;
    display:block;
@@ -52,12 +50,6 @@ video {
 
 .controls > *:first-child {
    margin-left:0;
-}
-
-.controls #progress {
-   cursor:pointer;
-   width:100%;
-   background: blue;
 }
 
 .controls button {
@@ -86,21 +78,16 @@ video {
    height:81%;
    margin-top:0.125rem;
    border:none;
-   color:#0095dd;
    -moz-border-radius:2px;
    -webkit-border-radius:2px;
    border-radius:2px;
+   cursor:pointer;
+   background: blue;
 }
 
 .controls #progress[data-state="fake"] {
    background:#fff;
    height:65%;
-}
-.controls #progress span {
-   width:0%;
-   height:100%;
-   display:inline-block;
-   background-color: white;
 }
 
 .controls #progress::-moz-progress-bar {
@@ -112,9 +99,9 @@ video {
 }
 
 #progress-bar {
-  background: #fff;
+  width: 1%;
+  background-color: black;
 }
-
 
 p {
   background-color: #fff;
