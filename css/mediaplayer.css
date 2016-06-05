@@ -12,15 +12,9 @@ h1 {
 }
 
 #progress-bar {
-  width: 100%; 
+  width: 100%;
 }
 
-video {
-	border:1px solid #2e52a4;
-	width:305px;
-	height:160px;
-	background:#000;
-}
 
 button {
 	text-indent:-9999px;
@@ -31,13 +25,6 @@ button {
 	background:transparent url('buttons.png') no-repeat 0 0;
 }
 
-.pause { background-position: 0; }
-.stop { background-position: 0; }
-.volume-plus { background-position: 0; }
-.volume-minus { background-position: 0; }
-.mute { background-position: 0; }
-.unmute { background-position: 0; }
-.replay { background-position: 0; }
 
 progress {
 	color:#fff;

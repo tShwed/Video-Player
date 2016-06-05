@@ -6,51 +6,59 @@
     <title>Interactive Video Player</title>
 
     <link rel="stylesheet" href="css/normalize.css">
+    <script src='js/jquery.js'></script>
+    <script src='js/jquery-ui/jquery-ui.js'></script>
     <link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
-    <link
     <link rel="stylesheet" href="css/styles.css">
+
 
   </head>
 
   <body>
+  <figure>
     <div class="wrapper">
 
       <video id="media-video" controls>
         <source src="video/video.mp4" type="video/mp4">
         <source src="video/video.ogg" type="video/ogg">
       </video>
-        <ul id="video-controls" class="controls">
-          <li><button id="playpause" type="button">Play/Pause</button></li>
-          <li><button id="stop" type="button">Stop</button></li>
-          <li class="progress">
-            <progress id="progress" value="0" min="0">
-            <div id="progress-bar"></div>
-            </progress>
+      <li class="progress">
+        <progress type='range' id="progress" value="0" min="0">
+        <div id="progress-bar"></div>
+        </progress>
           </li>
-          <li><button id="mute" type="button">Mute/Unmute</button></li>
-          <li><button id="volinc" type="button">Vol+</button></li>
-          <li><button id="voldec" type="button">Vol-</button></li>
-          <li><button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button></li>
+        <ul id="video-controls" class="controls">
+          <li><button id="playpause" type="button" data-state='play'><img src='icons/play-icon.png'></button></li>
+          <li><button id="stop" type="button" data-state='stop'><img src='icons/pause-icon.png'></button></li>
+          <div class="time">
+               <span id="current-time"></span> / <span id="duration-time"></span>
+           </div>
+          <li><button id="mute" type="button"><img src='icons/mute.png'></button></li>
+          <li><button id="volinc" type="button"><img src='icons/volume-on-icon.png'></button></li>
+          <li><button id="voldec" type="button"><img src='icons/volume-off-icon.png'></button></li>
+          <li><button id="fs" type="button" data-state="go-fullscreen"><img src='icons/fullscreen-icon.png'></button></li>
         </ul>
-  </div>
-      <p>Now that we've looked at the architecture
-      of the internet, let's see how you might connect your personal devices to
-      the internet inside your house. Well there are many ways to
-      connect to the internet, and most often people connect wirelessly. Let's look at an example of how
-      you can connect to the internet. If you live in a city or a town,
-      you probably have a coaxial cable for cable Internet, or a phone line if you
-      have DSL, running to the outside of your house, that connects you to
-      the Internet Service Provider, or ISP. If you live far out in the country,
-      you'll more likely have a dish outside your house, connecting
-      you wirelessly to your closest ISP, or you might also use the telephone system. Whether a wire comes straight from
-      the ISP hookup outside your house, or it travels over radio
-      waves from your roof, the first stop a wire will make once
-      inside your house, is at your modem. A modem is what connects the internet
-      to your network at home. A few common residential modems are DSL or </p>
+      </div>
+  </figure>
+  <p>
+    <span data-start-time="0.1" class='c'>Now that we've looked at the architecture of the internet, let's see how you might</span>
+    <span data-start-time="4.13" class='c'>connect your personal devices to the internet inside your house. </span>
+    <span data-start-time="7.535" class='c'>Well there are many ways to connect to the internet, and </span>
+    <span data-start-time="11.27" class='c'>most often people will connect wirelessly. </span>
+    <span data-start-time="13.96" class='c'>Let's look at an example of how you can connect to the internet. </span>
+    <span data-start-time="17.94" class='c'>If you live in a city or a town, you probably have a coaxial cable for </span>
+    <span data-start-time="22.37" class='c'>cable Internet, or a phone line if you have DSL, running to the outside of </span>
+    <span data-start-time="26.88" class='c'>your house, that connects you to the Internet Service Provider, or ISP. </span>
+    <span data-start-time="32.1" class='c'>If you live far out in the country, you'll more likely have </span>
+    <span data-start-time="34.73" class='c'>a dish outside your house, connecting you wirelessly to your closest ISP, or </span>
+    <span data-start-time="39.43" class='c'>you might also use the telephone system. </span>
+    <span data-start-time="42.35" class='c'>Whether a wire comes straight from the ISP hookup outside your house, or </span>
+    <span data-start-time="46.3" class='c'>it travels over radio waves from your roof, </span>
+    <span data-start-time="49.27" class='c'>the first stop a wire will make once inside your house, is at your modem. </span>
+    <span data-start-time="53.76" class='c'>A modem is what connects the internet to your network at home. </span>
+    <span data-start-time="57.78" class='c'>A few common residential modems are DSL are...</span>
+  </p>
     </div>
-    <progress id="progress" value="0" min="0">
-    <div id="progress-bar"></div>
-    </progress>
       <script src="js/main.js"></script>
     </body>
   </html>

@@ -1,112 +1,211 @@
-* {
-  margin: 10px auto;
-  padding: 10px 10px;
+html, body {
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
 }
-.wrapper {
-  margin: 0 auto;
-  background-color: #fff;
-  text-align: center;
-}
-
 body {
-  font-family: 'Nunito', sans-serif;
-  margin: 10px auto;
-  padding: 10px;
-  background-color: #fff;
+	color:white;
+	background-color:gray;
+	font-family:"Lucida Grande","Lucida Sans Unicode","DejaVu Sans",Lucida,Arial,Helvetica,sans-serif;
 }
-
-
+h1 {
+	color:#666;
+	font-size:20px;
+	font-size:1.25rem;
+	text-align:center;
+	margin:0;
+	padding:0.5rem 0;
+}
+a {
+	color:#0095dd;
+	text-decoration:none;
+}
+a:hover, a:focus {
+	color:#2255aa;
+	text-decoration:underline;
+}
+figure {
+	max-width:42.5rem;
+	width:90%;
+	height:90%;
+	max-height:494px;
+	max-height:30.875rem;
+	margin:20px auto;
+	margin:1.25rem auto;
+	padding:20px;
+	padding:1.051%;
+	color: white;
+	background-color:black;
+}
+figcaption {
+	display:block;
+	font-size:12px;
+	font-size:0.75rem;
+	color:#fff;
+}
 video {
-  max-width:64rem;
-     width:100%;
-     max-height:30.875rem;
-     height:100%;
-     margin:1.25rem auto;
-     padding:1.051%;
-     background-color:#666
+	max-width: 42.5rem;
+	width:100%;
+  height: 90%
 }
 
+/* controls */
+.controls, .controls > * {
+	padding:0;
+	margin:0;
+}
 .controls {
-  width:100%;
-  height:8.0971659919028340080971659919028%;
-  position:relative;
+	overflow:hidden;
+	background:transparent;
+	width:100%;
+	height:8.0971659919028340080971659919028%; /* of figure's height */
+	position:relative;
 }
-
 .controls[data-state=hidden] {
-   display:none;
+	display:none;
 }
-
 .controls[data-state=visible] {
-   display:block;
+	display:block;
 }
-
 .controls > * {
-   float:left;
-   width:10%;
-   height:100%;
-   margin-left:0.1953125%;
-   display:block;
+	float:left;
+	width:3.90625%;
+	height:100%;
+	margin-left:0.1953125%;
+	display:block;
 }
-
 .controls > *:first-child {
-   margin-left:0;
+	margin-left:0;
 }
-
+.controls .progress {
+	cursor:pointer;
+	width:75.390625%;
+}
 .controls button {
-   border:none;
-   cursor:pointer;
-   background:transparent;
-   background-size:contain;
-   background-repeat:no-repeat;
+	text-align:center;
+	overflow:hidden;
+	white-space:nowrap;
+  	text-overflow:ellipsis;
+  	border:none;
+  	cursor:pointer;
+  	background:transparent;
+  	background-size:contain;
+  	background-repeat:no-repeat;
+		width: 26px;
+		margin-right: 20px;
 }
-
 .controls button:hover, .controls button:focus {
-   opacity:0.5;
+	opacity:0.5;
+}
+#progress {
+	width: 100%;
+}
+.progress {
+	display:block;
+	width:100%;
+	height:81%;
+	margin-top:2px;
+	margin-top:0.125rem;
+	border:none;
+	overflow:hidden;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	color:#0095dd; /* Internet Explorer uses this value as the progress bar's value colour */
+}
+.progress[data-state="fake"] {
+	background:#e6e6e6;
+	height:65%;
+}
+.progress span {
+	width:0%;
+	height:100%;
+	display:inline-block;
+	background-color:#2a84cd;
 }
 
-.controls button[data-state="play"] {
-   background-image: url('data:image/png;base64,iVBORw0KGgoAAA ... ');
+.progress::-moz-progress-bar {
+	background-color:#0095dd;
+}
+/* Chrome requires its own rule for this, otherwise it ignores it */
+.progress::-webkit-progress-value {
+	background-color:#0095dd;
 }
 
-.controls button[data-state="pause"] {
-   background-image: url('data:image/png;base64,iVBORw0KGgoAAA ... ');
+/* fullscreen */
+html:-ms-fullscreen {
+	width:100%;
+}
+:-webkit-full-screen {
+	background-color:transparent;
+}
+video:-webkit-full-screen + .controls {
+	background:#ccc; /* required for Chrome which doesn't heed the transparent value set above */
+}
+video:-webkit-full-screen + .controls progress {
+	margin-top:0.5rem;
 }
 
-.controls #progress {
-   display:block;
-   width:100%;
-   height:81%;
-   margin-top:0.125rem;
-   border:none;
-   -moz-border-radius:2px;
-   -webkit-border-radius:2px;
-   border-radius:2px;
-   cursor:pointer;
-   background: blue;
+/* hide controls on fullscreen with WebKit */
+figure[data-fullscreen=true] video::-webkit-media-controls {
+	display:none !important;
+}
+figure[data-fullscreen=true] {
+	max-width:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	max-height:100%;
+}
+figure[data-fullscreen=true] video {
+	height:auto;
+}
+figure[data-fullscreen=true] figcaption {
+	display:none;
+}
+figure[data-fullscreen=true] .controls {
+	position:absolute;
+	bottom:2%;
+	width:100%;
+	z-index:2147483647;
+}
+figure[data-fullscreen=true] .controls li {
+	width:5%;
+}
+figure[data-fullscreen=true] .controls .progress {
+	width:68%;
 }
 
-.controls #progress[data-state="fake"] {
-   background:#fff;
-   height:65%;
-}
 
-.controls #progress::-moz-progress-bar {
-   background-color:#aaa;
-}
 
-.controls #progress::-webkit-progress-value {
-   background-color:#aaa;
-}
+	.controls {
+		height:auto;
+	}
+	.controls > * {
+		display:block;
+		width:16.6667%;
+		margin-left:0;
+		height:40px;
+		height:2.5rem;
+		margin-top:2.5rem;
+	}
+	.controls .progress {
+		/*display:table-caption;*/ /* this trick doesn't work as elements are floated and the layout doesn't work */
+		position:absolute;
+		top:0;
+		width:100%;
+		float:none;
+		margin-top:0;
+	}
+	.controls .progress progress {
+		width:100%;
+		margin:0 auto;
+	}
 
-#progress-bar {
-  width: 1%;
-  background-color: black;
-}
-
-p {
-  background-color: #fff;
-  margin: 0 auto;
-  padding: 10px;
-  max-width: 90%;
-  clear: both;
-}
+	#progress value {
+		display: block;
+	}
+	.controls button {
+		background-position:center center;
+	}
