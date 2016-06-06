@@ -32,7 +32,7 @@ seekBar.addEventListener("change", function() {
 $video.addEventListener("timeupdate", function() {
   // Calculate the slider value
   var value = (100 / $video.duration) * $video.currentTime;
-
+  timeline(value);
   // Update the slider value
   seekBar.value = value;
 });
@@ -124,6 +124,8 @@ $video.addEventListener('timeupdate', function() {
 });
 
 
+
+
 			// Listen for fullscreen change events (from other controls, e.g. right clicking on the video itself)
 			document.addEventListener('fullscreenchange', function(e) {
 				setFullscreenData(!!(document.fullScreen || document.fullscreenElement));
@@ -151,7 +153,6 @@ $video.addEventListener('timeupdate', function() {
          $('span[data-start-time="' + h + '"]').effect('highlight', {color:'orange'});
         }
 
-timeupdate.addEventListener()
     //Timeline for highlights
         function timeline(currentTime) {
           if (currentTime > 0.1 && currentTime < 4.130) {
