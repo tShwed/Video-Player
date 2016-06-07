@@ -10,19 +10,19 @@ var $fullScreen = $(document.getElementById('fs'));
 var videoContainer = document.getElementsByClassName('wrapper');
 var $video = document.getElementById('media-video');
 var videoControls = document.getElementById('video-controls');
-var seekBar = document.getElementById('progress');
-console.log(seekBar);
 var currentTime = document.getElementById('current-time');
-var durationTime = document.getElementById('duration-time');
+var durationTime = 0.98;
+
+
 //Seek Bar
 
-$(seekBar).slider({
+$(progress).slider({
   range: true
 });
 // Event listener for the seek bar
-seekBar.addEventListener("change", function() {
+progress.addEventListener("change", function() {
   // Calculate the new time
-  var time = $video.duration * (seekBar.value / 100);
+  var time = $video.duration * (progress.value / 100);
 
   // Update the video time
   $video.currentTime = time;
@@ -32,18 +32,21 @@ seekBar.addEventListener("change", function() {
 $video.addEventListener("timeupdate", function() {
   // Calculate the slider value
   var value = (100 / $video.duration) * $video.currentTime;
+
   timeline(value);
+
   // Update the slider value
-  seekBar.value = value;
+  progress.value = value;
 });
 
 // Pause the video when the slider handle is being dragged
-seekBar.addEventListener("mousedown", function() {
+progress.addEventListener("mousedown", function() {
   $video.pause();
+  $video.currentTime = ($('.ui-slider-range.ui-widget-header.ui-corner-all').width() / 100) * $video.duration;
 });
 
 // Play the video when the slider handle is dropped
-seekBar.addEventListener("mouseup", function() {
+progress.addEventListener("mouseup", function() {
   $video.play();
 });
 
@@ -58,8 +61,6 @@ var alterVolume = function(dir) {
         }
 };
 
-
-//Goes through the full screen browser functions to match it with the right one
 
 // Hide the default controls
 $video.controls = false;
@@ -90,103 +91,110 @@ if (supportsVideo) {
      $video.muted = !$video.muted;
   });
 
-//Pauses video and resets to start
-  stop.addEventListener('click', function(e) {
-     $video.pause();
-     $video.currentTime = 0;
-     progress.value = 0;
-  });
-
-  $fullScreen.click(function () {
-      if ($video.requestFullscreen) {
-          $video.requestFullscreen();
-      } else if ($video.mozRequestFullScreen) {
-          $video.mozRequestFullScreen(); // Firefox
-      } else if ($video.webkitRequestFullscreen) {
-          $video.webkitRequestFullscreen(); // Chrome and Safari
-      }
-  });
-}
+//full screen
+            $fullScreen.click(function () {
+                  if ($video.requestFullscreen) {
+                      $video.requestFullscreen();
+                  } else if ($video.mozRequestFullScreen) {
+                      $video.mozRequestFullScreen(); // Firefox
+                  } else if ($video.webkitRequestFullscreen) {
+                      $video.webkitRequestFullscreen(); // Chrome and Safari
+                  }
+              });
+            }
 //progress bar code
-$video.addEventListener('loadedmetadata', function() {
-   progress.setAttribute('max', $video.duration);
-});
+            $video.addEventListener('loadedmetadata', function() {
+               progress.setAttribute('max', $video.duration);
+            });
 
-$video.addEventListener('timeupdate', function() {
-   progress.value = $video.currentTime;
-   progressBar.style.width = Math.floor(($video.currentTime / $video.duration) * 100) + '%';
-});
+            $video.addEventListener('timeupdate', function() {
+               progress.value = $video.currentTime;
+               progressBar.style.width = Math.floor(($video.currentTime / $video.duration) * 100) + '%';
+            });
 
-$video.addEventListener('timeupdate', function() {
-   if (!progress.getAttribute('max')) progress.setAttribute('max', $video.duration);
-   progress.value = $video.currentTime;
-   progressBar.style.width = Math.floor(($video.currentTime / $video.duration) * 100) + '%';
-});
-
-
+            $video.addEventListener('timeupdate', function() {
+               if (!progress.getAttribute('max')) progress.setAttribute('max', $video.duration);
+               progress.value = $video.currentTime;
+               progressBar.style.width = Math.floor(($video.currentTime / $video.duration) * 100) + '%';
+            });
 
 
-			// Listen for fullscreen change events (from other controls, e.g. right clicking on the video itself)
-			document.addEventListener('fullscreenchange', function(e) {
-				setFullscreenData(!!(document.fullScreen || document.fullscreenElement));
-			});
-			document.addEventListener('webkitfullscreenchange', function() {
-				setFullscreenData(!!document.webkitIsFullScreen);
-			});
-			document.addEventListener('mozfullscreenchange', function() {
-				setFullscreenData(!!document.mozFullScreen);
-			});
-			document.addEventListener('msfullscreenchange', function() {
-				setFullscreenData(!!document.msFullscreenElement);
-			});
+  // Listen for fullscreen change events (from other controls, e.g. right clicking on the video itself)
+            document.addEventListener('fullscreenchange', function(e) {
+                setFullscreenData(!!(document.fullScreen || document.fullscreenElement));
+            });
+            document.addEventListener('webkitfullscreenchange', function() {
+                setFullscreenData(!!document.webkitIsFullScreen);
+            });
+            document.addEventListener('mozfullscreenchange', function() {
+                setFullscreenData(!!document.mozFullScreen);
+            });
+            document.addEventListener('msfullscreenchange', function() {
+                setFullscreenData(!!document.msFullscreenElement);
+            });
 
+//Shows current time of video
+            $video.addEventListener('timeupdate', function() {
+              	var playedMinutes = parseInt($video.currentTime / 60, 10);
+              	var playedSeconds = parseInt($video.currentTime % 60);
+              	//tests to add leading 0 to short times
+              	if (playedMinutes < 10) {
+              		playedMinutes = "0" + playedMinutes;
+              	}
+              	if (playedSeconds < 10) {
+              		playedSeconds = "0" + playedSeconds;
+              	}
+              	currentTime.innerHTML = playedMinutes + ":" + playedSeconds;
+              });
+
+//Hide/Show controls
       $('.wrapper').mouseenter(function () {
             $('#video-controls').fadeIn(500);
         });
 
 
-        $('.wrapper').mouseleave(function () {
-              $('#video-controls').fadeOut(500);
-          });
+      $('.wrapper').mouseleave(function () {
+            $('#video-controls').fadeOut(500);
+        });
 
+//Caption highlight
         function startHighlight(h) {
          $('span[data-start-time="' + h + '"]').effect('highlight', {color:'orange'});
         }
 
-    //Timeline for highlights
-        function timeline(currentTime) {
-          if (currentTime > 0.1 && currentTime < 4.130) {
-             startHighlight(0.1);
-          } else if (currentTime > 4.13 && currentTime < 7.535) {
-             startHighlight(4.13);
-          } else if (currentTime > 7.535 && currentTime < 11.27) {
-             startHighlight(7.535);
-          } else if (currentTime > 11.27 && currentTime < 13.96) {
-            startHighlight(11.27);
-          } else if (currentTime > 13.96 && currentTime < 17.94) {
-            startHighlight(13.96);
-          } else if (currentTime > 17.94 && currentTime < 22.37) {
-            startHighlight(17.94);
-          } else if (currentTime > 22.37 && currentTime < 26.88) {
-            startHighlight(22.37);
-          } else if (currentTime > 26.88 && currentTime < 30.92) {
-            startHighlight(26.88);
-          } else if (currentTime > 32.1 && currentTime < 34.73) {
-            startHighlight(32.1);
-          } else if (currentTime > 34.73 && currentTime < 39.43) {
-            startHighlight(34.73 );
-          } else if (currentTime > 39.43 && currentTime < 41.19) {
-            startHighlight(39.43);
-          } else if (currentTime > 42.35 && currentTime < 46.3) {
-            startHighlight(42.35);
-          } else if (currentTime > 46.3 && currentTime < 49.27) {
-            startHighlight(46.3);
-          } else if (currentTime > 49.27 && currentTime < 53.76) {
-            startHighlight(49.27);
-          } else if (currentTime > 53.76 && currentTime < 57.78 ) {
-            startHighlight(53.76);
-          } else if (currentTime > 57.78) {
-            startHighlight(57.78);
-          }
+    function timeline(currentTime) {
+      var time = currentTime / 1.739
+      if (time > 0.1 && time < 4.13) {
+           startHighlight(0.1);
+        } else if (time > 4.13 && time < 7.535) {
+           startHighlight(4.13);
+        } else if (time > 7.535 && time < 11.27) {
+          startHighlight(7.535);
+        } else if (time > 11.27 && time < 13.96) {
+          startHighlight(11.27);
+        } else if (time > 13.96 && time < 17.94) {
+          startHighlight(13.96);
+        } else if (time > 17.94 && time < 22.37) {
+          startHighlight(17.94);
+        } else if (time > 22.37 && time < 26.88) {
+          startHighlight(22.37);
+        } else if (time > 26.88 && time < 30.92) {
+          startHighlight(26.88);
+        } else if (time > 32.1 && time < 34.73) {
+          startHighlight(32.1);
+        } else if (time > 34.73 && time < 39.43) {
+          startHighlight(34.73);
+        } else if (time > 39.43 && time < 41.19) {
+          startHighlight(39.43);
+        } else if (time > 42.35 && time < 46.3) {
+          startHighlight(42.35);
+        } else if (time > 46.3 && time < 49.27) {
+          startHighlight(46.3);
+        } else if (time > 49.27 && time < 53.76) {
+          startHighlight(49.27);
+        } else if (time > 53.76 && time < 57.78 ) {
+          startHighlight(53.76);
+        } else if (time > 57.78) {
+          startHighlight(57.78);
         }
-  timeline();
+    }

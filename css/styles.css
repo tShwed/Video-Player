@@ -92,14 +92,15 @@ video {
   	background:transparent;
   	background-size:contain;
   	background-repeat:no-repeat;
-		width: 26px;
+		width: 35px;
 		margin-right: 20px;
 }
 .controls button:hover, .controls button:focus {
 	opacity:0.5;
 }
+
 #progress {
-	width: 100%;
+	width: 100%; 
 }
 .progress {
 	display:block;
