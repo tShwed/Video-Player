@@ -100,7 +100,7 @@ video {
 }
 
 #progress {
-	width: 100%; 
+	width: 100%;
 }
 .progress {
 	display:block;
@@ -185,11 +185,15 @@ figure[data-fullscreen=true] .controls .progress {
 	}
 	.controls > * {
 		display:block;
-		width:16.6667%;
+		width:95px;
 		margin-left:0;
 		height:40px;
 		height:2.5rem;
 		margin-top:2.5rem;
+	}
+
+	.controls .time {
+		width: 110px; 
 	}
 	.controls .progress {
 		/*display:table-caption;*/ /* this trick doesn't work as elements are floated and the layout doesn't work */

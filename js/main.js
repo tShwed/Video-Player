@@ -1,6 +1,6 @@
 // Variables. Mostly buttons s
-var playpause = document.getElementById('playpause');
-var stop = document.getElementById('stop');
+var play = document.getElementById('play');
+var pause = document.getElementById('pause');
 var mute = document.getElementById('mute');
 var volinc = document.getElementById('volinc');
 var voldec = document.getElementById('voldec');
@@ -73,11 +73,13 @@ var supportsVideo = !!document.createElement('video').canPlayType;
 if (supportsVideo) {
 
 //The play pause controls for the video
-  playpause.addEventListener('click', function(e) {
+  play.addEventListener('click', function(e) {
      if ($video.paused || $video.ended) $video.play();
-     else $video.pause();
   });
 
+  pause.addEventListener('click', function(e) {
+    $video.pause();
+  });
 //Increase and Decrease in volume by .1 increments. Largest is 1
   volinc.addEventListener('click', function(e) {
      alterVolume('+');
@@ -148,53 +150,72 @@ if (supportsVideo) {
               });
 
 //Hide/Show controls
-      $('.wrapper').mouseenter(function () {
+      $('figure').mouseenter(function () {
             $('#video-controls').fadeIn(500);
         });
 
 
-      $('.wrapper').mouseleave(function () {
+      $('figure').mouseleave(function () {
             $('#video-controls').fadeOut(500);
         });
 
 //Caption highlight
         function startHighlight(h) {
-         $('span[data-start-time="' + h + '"]').effect('highlight', {color:'orange'});
-        }
+         $('span[data-start-time="' + h + '"]').css("background-color", "orange");
+       }
+
+       function stopHighlight(h) {
+         $('span[data-start-time="' + h + '"]').css("background-color", "grey");
+       }
 
     function timeline(currentTime) {
-      var time = currentTime / 1.739
+      var time = currentTime / 1.739;
       if (time > 0.1 && time < 4.13) {
            startHighlight(0.1);
         } else if (time > 4.13 && time < 7.535) {
+           stopHighlight(0.1);
            startHighlight(4.13);
         } else if (time > 7.535 && time < 11.27) {
+          stopHighlight(4.13);
           startHighlight(7.535);
         } else if (time > 11.27 && time < 13.96) {
+          stopHighlight(7.535)
           startHighlight(11.27);
         } else if (time > 13.96 && time < 17.94) {
+          stopHighlight(11.27);
           startHighlight(13.96);
         } else if (time > 17.94 && time < 22.37) {
+          stopHighlight(13.96);
           startHighlight(17.94);
         } else if (time > 22.37 && time < 26.88) {
+          stopHighlight(17.94);
           startHighlight(22.37);
         } else if (time > 26.88 && time < 30.92) {
+          stopHighlight(22.37);
           startHighlight(26.88);
         } else if (time > 32.1 && time < 34.73) {
+          stopHighlight(26.88);
           startHighlight(32.1);
         } else if (time > 34.73 && time < 39.43) {
+          stopHighlight(32.1);
           startHighlight(34.73);
         } else if (time > 39.43 && time < 41.19) {
+          stopHighlight(34.73);
           startHighlight(39.43);
         } else if (time > 42.35 && time < 46.3) {
+          stopHighlight(39.43);
           startHighlight(42.35);
         } else if (time > 46.3 && time < 49.27) {
+          stopHighlight(42.35);
           startHighlight(46.3);
         } else if (time > 49.27 && time < 53.76) {
+          stopHighlight(46.3);
           startHighlight(49.27);
         } else if (time > 53.76 && time < 57.78 ) {
+          stopHighlight(49.27);
           startHighlight(53.76);
         } else if (time > 57.78) {
+          stopHighlight(53.76);
           startHighlight(57.78);
         }
     }

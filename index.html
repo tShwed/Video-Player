@@ -17,7 +17,6 @@
   <body>
   <figure>
     <div class="wrapper">
-
       <video id="media-video" controls>
         <source src="video/video.mp4" type="video/mp4">
         <source src="video/video.ogg" type="video/ogg">
@@ -28,7 +27,8 @@
         </progress>
           </li>
         <ul id="video-controls" class="controls">
-          <li><button id="playpause" type="button" data-state='play'><img src='icons/play-icon.png'></button></li>
+          <li><button id="play" type="button" data-state='play'><img src='icons/play-icon.png'></button></li>
+          <li><button id='pause' type='button' data-state='pause'><img src='icons/pause-icon.png'></button></li>
           <div class="time">
                <span id="current-time"></span> / <span>00:59</span>
            </div>
