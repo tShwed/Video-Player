@@ -223,5 +223,5 @@ figure[data-fullscreen=true] .controls .progress {
 
 	.bar {
 		margin: 0 auto;
-		padding: 0 auto; 
+		padding: 0; 
 	}
