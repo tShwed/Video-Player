@@ -50,6 +50,10 @@ video {
   height: 90%
 }
 
+ol {
+	list-style: none;
+	display: block;
+}
 /* controls */
 .controls, .controls > * {
 	padding:0;
@@ -140,6 +144,8 @@ html:-ms-fullscreen {
 }
 :-webkit-full-screen {
 	background-color:transparent;
+	width: 100%;
+	height: 100%;
 }
 video:-webkit-full-screen + .controls {
 	background:#ccc; /* required for Chrome which doesn't heed the transparent value set above */
@@ -193,7 +199,7 @@ figure[data-fullscreen=true] .controls .progress {
 	}
 
 	.controls .time {
-		width: 110px; 
+		width: 110px;
 	}
 	.controls .progress {
 		/*display:table-caption;*/ /* this trick doesn't work as elements are floated and the layout doesn't work */
@@ -213,4 +219,9 @@ figure[data-fullscreen=true] .controls .progress {
 	}
 	.controls button {
 		background-position:center center;
+	}
+
+	.bar {
+		margin: 0 auto;
+		padding: 0 auto; 
 	}

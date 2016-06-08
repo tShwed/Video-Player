@@ -155,7 +155,7 @@ if (supportsVideo) {
         });
 
 
-      $('figure').mouseleave(function () {
+      $('.wrapper').mouseleave(function () {
             $('#video-controls').fadeOut(500);
         });
 
@@ -179,7 +179,7 @@ if (supportsVideo) {
           stopHighlight(4.13);
           startHighlight(7.535);
         } else if (time > 11.27 && time < 13.96) {
-          stopHighlight(7.535)
+          stopHighlight(7.535); 
           startHighlight(11.27);
         } else if (time > 13.96 && time < 17.94) {
           stopHighlight(11.27);
