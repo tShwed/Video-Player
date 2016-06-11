@@ -142,7 +142,6 @@ if (supportsVideo) {
                progress.value = $video.currentTime;
                progressBar.style.width = Math.floor(($video.currentTime / $video.duration) * 100) + '%';
             });
-console.log(setFullscreenData());
 
   // Listen for fullscreen change events (from other controls, e.g. right clicking on the video itself)
             document.addEventListener('fullscreenchange', function(e) {
@@ -157,6 +156,8 @@ console.log(setFullscreenData());
             document.addEventListener('msfullscreenchange', function() {
                 setFullscreenData(!!document.msFullscreenElement);
             });
+
+
 
 //Shows current time of video
             $video.addEventListener('timeupdate', function() {
