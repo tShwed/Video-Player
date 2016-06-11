@@ -148,7 +148,7 @@ html:-ms-fullscreen {
 	height: 100%;
 }
 
-:-webkit-full-screen video {
+:-webkit-full-screen #media-video {
 	height: 100%;
 	width: 100%; 
 }
