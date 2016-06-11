@@ -180,7 +180,7 @@ figure[data-fullscreen=true] .controls .progress {
 	width:68%;
 }
 
-#media-video:-webkit-full-screen {
+video:-webkit-full-screen {
 	background-color:transparent;
 	width: 100%;
 	height: 100%;
