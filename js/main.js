@@ -12,7 +12,9 @@ var $video = document.getElementById('media-video');
 var videoControls = document.getElementById('video-controls');
 var currentTime = document.getElementById('current-time');
 var durationTime = 0.98;
-
+var setFullscreenData = function(state) {
+   videoContainer.setAttribute('data-fullscreen', !!state);
+};
 
 //Seek Bar
 
@@ -92,7 +94,7 @@ if (supportsVideo) {
    } else
      $video.pause();
  });
- //Changes playpause icon 
+ //Changes playpause icon
   playpause.addEventListener('click', function(e) {
     if ($video.paused){
       playIcon();
@@ -140,7 +142,7 @@ if (supportsVideo) {
                progress.value = $video.currentTime;
                progressBar.style.width = Math.floor(($video.currentTime / $video.duration) * 100) + '%';
             });
-
+console.log(setFullscreenData());
 
   // Listen for fullscreen change events (from other controls, e.g. right clicking on the video itself)
             document.addEventListener('fullscreenchange', function(e) {
