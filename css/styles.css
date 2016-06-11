@@ -223,5 +223,11 @@ figure[data-fullscreen=true] .controls .progress {
 
 	.bar {
 		margin: 0 auto;
-		padding: 0; 
+		padding: 0;
+	}
+
+	#playpause {
+		background: url('../icons/play-icon.png');
+		height: 26px;
+		background-repeat: no-repeat;
 	}

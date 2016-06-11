@@ -1,5 +1,5 @@
 // Variables. Mostly buttons s
-var play = document.getElementById('play');
+var playpause = document.getElementById('playpause');
 var pause = document.getElementById('pause');
 var mute = document.getElementById('mute');
 var volinc = document.getElementById('volinc');
@@ -39,6 +39,19 @@ $video.addEventListener("timeupdate", function() {
   progress.value = value;
 });
 
+//styles playpause button to pause state
+function pauseIcon() {
+	playpause.style.width = "18px";
+	playpause.style.height = "24px";
+	playpause.style.background = "url('./icons/pause-icon.png')";
+}
+
+//styles playpause button to play state
+function playIcon() {
+	playpause.style.width = "22px";
+	playpause.style.height = "26px";
+	playpause.style.background = "url('./icons/play-icon.png')";
+}
 // Pause the video when the slider handle is being dragged
 progress.addEventListener("mousedown", function() {
   $video.pause();
@@ -73,13 +86,21 @@ var supportsVideo = !!document.createElement('video').canPlayType;
 if (supportsVideo) {
 
 //The play pause controls for the video
-  play.addEventListener('click', function(e) {
-     if ($video.paused || $video.ended) $video.play();
+  playpause.addEventListener('click', function(e) {
+     if ($video.paused || $video.ended) {
+     $video.play();
+   } else
+     $video.pause();
+ });
+ //Changes playpause icon 
+  playpause.addEventListener('click', function(e) {
+    if ($video.paused){
+      playIcon();
+    } else {
+      pauseIcon();
+    }
   });
 
-  pause.addEventListener('click', function(e) {
-    $video.pause();
-  });
 //Increase and Decrease in volume by .1 increments. Largest is 1
   volinc.addEventListener('click', function(e) {
      alterVolume('+');
@@ -179,7 +200,7 @@ if (supportsVideo) {
           stopHighlight(4.13);
           startHighlight(7.535);
         } else if (time > 11.27 && time < 13.96) {
-          stopHighlight(7.535); 
+          stopHighlight(7.535);
           startHighlight(11.27);
         } else if (time > 13.96 && time < 17.94) {
           stopHighlight(11.27);
