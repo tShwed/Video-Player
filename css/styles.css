@@ -142,16 +142,12 @@ ol {
 html:-ms-fullscreen {
 	width:100%;
 }
-:-webkit-full-screen {
+#media-video:-webkit-full-screen {
 	background-color:transparent;
 	width: 100%;
 	height: 100%;
 }
 
-:-webkit-full-screen #media-video {
-	height: 100%;
-	width: 100%; 
-}
 video:-webkit-full-screen + .controls {
 	background:#ccc; /* required for Chrome which doesn't heed the transparent value set above */
 }
