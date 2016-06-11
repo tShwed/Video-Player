@@ -13,7 +13,7 @@ var videoControls = document.getElementById('video-controls');
 var currentTime = document.getElementById('current-time');
 var durationTime = 0.98;
 var setFullscreenData = function(state) {
-   videoContainer.setAttribute('data-fullscreen', !!state);
+   $video.setAttribute('data-fullscreen', !!state);
 };
 
 //Seek Bar
