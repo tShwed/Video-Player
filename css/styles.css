@@ -142,11 +142,7 @@ ol {
 html:-ms-fullscreen {
 	width:100%;
 }
-video:-webkit-full-screen {
-	background-color:transparent;
-	width: 100%;
-	height: 100%;
-}
+
 
 video:-webkit-full-screen + .controls {
 	background:#ccc; /* required for Chrome which doesn't heed the transparent value set above */
@@ -185,7 +181,11 @@ figure[data-fullscreen=true] .controls .progress {
 	width:68%;
 }
 
-
+video:-webkit-full-screen {
+	background-color:transparent;
+	width: 100%;
+	height: 100%;
+}
 
 	.controls {
 		height:auto;
