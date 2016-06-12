@@ -186,6 +186,9 @@ figure[data-fullscreen=true] .controls .progress {
 	height: 100%;
 }
 
+video::-webkit-full-screen{ 
+  max-width: 100%; 
+}
 	.controls {
 		height:auto;
 	}
