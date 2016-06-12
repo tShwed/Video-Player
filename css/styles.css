@@ -231,3 +231,7 @@ figure[data-fullscreen=true] .controls .progress {
 		height: 26px;
 		background-repeat: no-repeat;
 	}
+video:fullscreen {
+	height: 100%;
+	width: 100%;
+}
